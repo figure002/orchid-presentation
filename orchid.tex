@@ -1,0 +1,318 @@
+\documentclass[]{beamer}
+
+% Setup appearance:
+\mode<presentation>
+{
+    \usetheme{Berlin}
+    \usecolortheme{default}
+    \useinnertheme{circles}
+}
+
+\usepackage[english]{babel} % apt-get install texlive-lang-english
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs} % Pretty rules for tables
+\usepackage{enumerate} % Enumerated lists
+\usepackage{graphicx}
+\usepackage{wrapfig} % Wrapping text around images
+\usepackage{caption} % Advanced features for image/table captions
+\usepackage{tikz}
+\usetikzlibrary{arrows,backgrounds,fit,shapes}
+
+% Configure caption
+\captionsetup{margin=10pt,font=scriptsize,labelfont=bf,labelsep=colon}
+
+% For including images
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\graphicspath{{./images/}}
+
+\title[OrchiD]
+    {OrchiD: identification of orchid species by means of image recognition}
+
+\author[Gravendeel, Pereira, Vos]
+    {Barbara Gravendeel\inst{1}, Serrano Pereira\inst{1}, Rutger Vos\inst{1}}
+
+\institute[Naturalis Biodiversity Center]
+{
+  \inst{1}
+  Naturalis Biodiversity Center, The Netherlands
+}
+
+\date{November 15, 2014}
+
+\subject{Bioinformatics}
+
+% Show ToC at beginning of each section
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>{Introduction}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+\begin{document}
+
+% Title page
+\frame{\titlepage}
+
+% ToC
+\begin{frame}
+\frametitle{Contents}
+\tableofcontents
+\end{frame}
+
+\section{Introduction}
+
+    \subsection{Lady Slippers}
+
+    \begin{frame}
+        \frametitle{Lady Slippers}
+
+        \begin{enumerate}
+            \item Horticulturally popular group
+            \item Highly endangered in the wild
+            \item Well identifiable based on shape \& colors of flowers
+        \end{enumerate}
+
+        % Three horizontally aligned images.
+        \begin{figure}[!htb]
+            \minipage{0.26\textwidth}
+              \includegraphics[width=\linewidth]{Mexipedium_xerophyticum}
+              \caption*{\textit{Mexipedium xerophyticum}}
+            \endminipage\hfill
+            \minipage{0.30\textwidth}
+              \includegraphics[width=\linewidth]{Phragmipedium_besseae}
+              \caption*{\textit{Phragmipedium besseae}}
+            \endminipage\hfill
+            \minipage{0.28\textwidth}
+              \includegraphics[width=\linewidth]{Paphiopedilum_druryi}
+              \caption*{\textit{Paphiopedilum druryi}}
+            \endminipage\hfill
+        \end{figure}
+    \end{frame}
+
+    \subsection{Goal}
+
+    \begin{frame}
+        \frametitle{Goal}
+
+        Image fingerprinting and recognition for the taxonomic classification
+        of digital images.
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Outcomes}
+
+        \begin{enumerate}
+            \item A vetted digital image collection
+            \item Trained artificial neural networks
+            \item A library of generic image feature extraction algorithms
+            \item Training and classification methods
+        \end{enumerate}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Photo Classification Workflow}
+
+        \begin{tikzpicture}[node distance=2.5cm,
+                            >=stealth,
+                            thick,
+                            rounded corners=2pt,
+                            auto]
+            \tikzstyle{box}=[rectangle,
+                            minimum size=6mm,
+                            draw=black!50 ,
+                            top color=white ,
+                            bottom color=black!20]
+            \tikzstyle{img}=[inner sep=0pt]
+
+            \node[box] (client)                                {Client};
+            \node[box] (prep)           [right of=client,
+                                        xshift=2cm]            {Prerocessing};
+            \node[box] (feature_ext)    [below of=prep,
+                                        yshift=1cm]            {Feature Extraction};
+            \node[box] (ann)            [below of=feature_ext,
+                                        yshift=0.5cm]          {Neural Network};
+
+            \draw[->] (client) -- (prep)
+                node[midway] {\includegraphics[width=.10\textwidth]{Paphiopedilum_druryi}};
+            \draw[->] (prep) -- (feature_ext);
+            \draw[->] (feature_ext) -- (ann)
+                node[midway] (pheno) {Phenotype};
+            \draw[->] (ann.west) -- (client)
+                node[midway] (class) {Classification};
+
+            % Background for the server.
+            \begin{scope} [on background layer]
+                \node [fill=black!20,
+                       fit=(prep) (feature_ext) (pheno) (ann),
+                       label=above:Server] {};
+            \end{scope}
+        \end{tikzpicture}
+    \end{frame}
+
+\section{Methods}
+
+    \begin{frame}
+        \frametitle{Image Processing Workflow}
+
+        \begin{tikzpicture}[node distance=2.5cm,
+                            >=stealth,
+                            thick,
+                            rounded corners=2pt,
+                            auto]
+            \tikzstyle{box}=[rectangle,
+                            minimum size=6mm,
+                            draw=black!50 ,
+                            top color=white ,
+                            bottom color=black!20]
+            \tikzstyle{img}=[inner sep=0pt]
+
+            \node[img] (image) {\includegraphics[width=.10\textwidth]{Paphiopedilum_druryi}};
+            \node[box] (color correction)   [right of=image]                {Color Correction};
+            \node[box] (segmentation)       [below of=color correction]     {Segmentation};
+            \node[box] (color)              [right of=color correction,
+                                            xshift=1cm]                     {Color};
+            \node[box] (shape)              [below of=color]                {Shape};
+            \node[box] (phenotype)          [below of=shape]                {Phenotype};
+
+            \draw[->] (image) to (color correction);
+            \draw[->] (color correction) -- (segmentation);
+            \draw[->] (color) -- (shape);
+            \draw[->] (shape) -- (phenotype);
+
+            % Background for preprocessing.
+            \begin{scope} [on background layer]
+                \node [fill=black!20,
+                       fit=(color correction) (segmentation),
+                       label=above:Preprocessing] {};
+                \draw[->] (4,-1) -- (5,-1);
+            \end{scope}
+
+            % Background for feature extraction.
+            \begin{scope} [on background layer]
+                \node [fill=black!20,
+                       fit=(color) (shape),
+                       label=above:Feature Extraction] {};
+            \end{scope}
+        \end{tikzpicture}
+    \end{frame}
+
+    \subsection{Training}
+
+    \begin{frame}
+        \frametitle{Artificial Neural Networks}
+
+        % Space between neuron layers.
+        \def\layersep{2.5cm}
+        % Number of input neurons.
+        \def\inputneurons{4}
+        % Number of hidden neurons.
+        \def\hiddenneurons{5}
+        % Number of output neurons.
+        \def\outputneurons{3}
+
+        % Source: http://www.texample.net/tikz/examples/neural-network/
+        \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
+            \tikzstyle{every pin edge}=[<-,shorten <=1pt]
+            \tikzstyle{neuron}=[circle,fill=black!25,minimum size=17pt,inner sep=0pt]
+            \tikzstyle{input neuron}=[neuron, draw=green!75, fill=green!20];
+            \tikzstyle{hidden neuron}=[neuron, draw=blue!75, fill=blue!20];
+            \tikzstyle{output neuron}=[neuron, draw=red!75, fill=red!20];
+            \tikzstyle{annot} = [text width=4em, text centered]
+
+            % Draw the input layer nodes
+            \foreach \name / \y in {1,...,\inputneurons}
+            % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
+                \node[input neuron, pin=left:Input \y] (I-\name) at (0,-\y) {};
+
+            % Draw the hidden layer nodes
+            \foreach \name / \y in {1,...,\hiddenneurons}
+                \path[yshift=0.5cm]
+                    node [hidden neuron]
+                    (H-\name) at (\layersep,-\y cm) {};
+
+            % Draw the output layer node
+            \foreach \name / \y in {1,...,\outputneurons}
+                \path[yshift=-0.5cm]
+                    node [output neuron,
+                          pin={[pin edge={->}]right:Output \y},
+                          right of=H-\y]
+                        (O-\name) at (\layersep,-\y cm) {};
+
+            % Connect every node in the input layer with every node in the
+            % hidden layer.
+            \foreach \source in {1,...,\inputneurons}
+                \foreach \dest in {1,...,\hiddenneurons}
+                    \path (I-\source) edge (H-\dest);
+
+            % Connect every node in the hidden layer with the output layer
+            \foreach \source in {1,...,\hiddenneurons}
+                \foreach \dest in {1,...,\outputneurons}
+                    \path (H-\source) edge (O-\dest);
+
+            % Annotate the layers
+            \node[annot,above of=H-1, node distance=1cm] (hl) {Hidden layer};
+            \node[annot,left of=hl] {Input layer};
+            \node[annot,right of=hl] {Output layer};
+        \end{tikzpicture}
+    \end{frame}
+
+
+
+    \begin{frame}
+        \frametitle{Codewords}
+
+        Codewords used for training artificial neural networks.
+
+        \begin{table}[h]\scriptsize
+            \begin{center}
+            \begin{tabular}{ll}
+            \toprule
+            \textbf{Class} & \textbf{Codeword} \\
+            \midrule
+            \textit{Cypripedium}    & \texttt{1 0 0 0 0} \\
+            \textit{Mexipedium}     & \texttt{0 1 0 0 0} \\
+            \textit{Paphiopedilum}  & \texttt{0 0 1 0 0} \\
+            \textit{Phragmipedium}  & \texttt{0 0 0 1 0} \\
+            \textit{Selenipedium}   & \texttt{0 0 0 0 1} \\
+            \bottomrule
+            \end{tabular}
+            \end{center}
+        \end{table}
+    \end{frame}
+
+\section{Resultaten}
+
+    \subsection{Conclusies}
+
+    \begin{frame}
+        \frametitle{Conclusies}
+
+        \begin{itemize}
+            \item {TODO}
+        \end{itemize}
+    \end{frame}
+
+    \section*{Samenvatting}
+
+    \begin{frame}{Samenvatting}
+        \begin{itemize}
+            \item TODO
+        \end{itemize}
+    \end{frame}
+
+\section*{Met dank aan}
+
+    \begin{frame}{Met dank aan}
+
+        \begin{itemize}
+            \item Dave Roberts
+            \item Hanneke de Wolf
+            \item Naturalis Applied Research grant
+            \item Patrick Wijntjes
+            \item 50+ fotografen
+        \end{itemize}
+    \end{frame}
+
+\end{document}
