@@ -153,6 +153,8 @@
 
 \section{Methods}
 
+    \subsection{Image Processing}
+
     \begin{frame}
         \frametitle{Image Processing Workflow}
 
@@ -198,7 +200,86 @@
         \end{tikzpicture}
     \end{frame}
 
-    \subsection{Training}
+    \begin{frame}
+        \frametitle{Image Preprocessing}
+
+        \begin{enumerate}
+            \item Image harvesting and selection
+            \item Color correction
+                \begin{itemize}
+                    \item Naik \& Murthy (2003) Hue-preserving color image enhancement without gamut problem.
+                \end{itemize}
+            \item Foreground segmentation
+                \begin{itemize}
+                    \item Rother, Kolmogorov \& Blake (2004) GrabCut: Interactive Foreground Extraction using Iterated Graph Cuts.
+                \end{itemize}
+        \end{enumerate}
+    \end{frame}
+
+    \frame[plain]{
+        \frametitle{Segmentation via GrabCut}
+
+        \begin{figure}[h]
+        \centering
+        \includegraphics[width=.60\textwidth]{GrabCut_druryi_1}
+        \end{figure}
+    }
+
+    \frame[plain]{
+        \frametitle{Segmentation via GrabCut}
+
+        \begin{figure}[h]
+        \centering
+        \includegraphics[width=.60\textwidth]{GrabCut_druryi_2}
+        \end{figure}
+    }
+
+    \frame[plain]{
+        \frametitle{Segmentation via GrabCut}
+
+        \begin{figure}[h]
+        \centering
+        \includegraphics[width=.60\textwidth]{GrabCut_druryi_3}
+        \end{figure}
+    }
+
+    \frame[plain]{
+        \frametitle{Segmentation via GrabCut}
+
+        \begin{figure}[h]
+        \centering
+        \includegraphics[width=.60\textwidth]{GrabCut_xerophyticum_1}
+        \end{figure}
+    }
+
+    \frame[plain]{
+        \frametitle{Segmentation via GrabCut}
+
+        \begin{figure}[h]
+        \centering
+        \includegraphics[width=.60\textwidth]{GrabCut_xerophyticum_2}
+        \end{figure}
+    }
+
+    \frame[plain]{
+        \frametitle{Segmentation via GrabCut}
+
+        \begin{figure}[h]
+        \centering
+        \includegraphics[width=.60\textwidth]{GrabCut_xerophyticum_3}
+        \end{figure}
+    }
+
+    \begin{frame}
+        \frametitle{Feature Extraction}
+
+        \begin{itemize}
+            \item Color
+            \item Shape
+        \end{itemize}
+    \end{frame}
+
+    \subsection{Neural Network Training}
 
     \begin{frame}
         \frametitle{Artificial Neural Networks}
