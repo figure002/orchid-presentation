@@ -111,7 +111,7 @@
         \end{enumerate}
     \end{frame}
 
-    \begin{frame}
+    \begin{frame}[plain]
         \frametitle{Photo Classification Workflow}
 
         \begin{tikzpicture}[node distance=2.5cm,
@@ -155,10 +155,10 @@
 
     \subsection{Image Processing}
 
-    \begin{frame}
+    \begin{frame}[plain]
         \frametitle{Image Processing Workflow}
 
-        \begin{tikzpicture}[node distance=2.5cm,
+        \begin{tikzpicture}[node distance=3cm,
                             >=stealth,
                             thick,
                             rounded corners=2pt,
@@ -173,28 +173,26 @@
             \node[img] (image) {\includegraphics[width=.10\textwidth]{Paphiopedilum_druryi}};
             \node[box] (color correction)   [right of=image]                {Color Correction};
             \node[box] (segmentation)       [below of=color correction]     {Segmentation};
-            \node[box] (color)              [right of=color correction,
-                                            xshift=1cm]                     {Color};
-            \node[box] (shape)              [below of=color]                {Shape};
-            \node[box] (phenotype)          [below of=shape]                {Phenotype};
+            \node[box] (feature extr)       [right of=color correction,
+                                            xshift=1cm]                     {Color \& Shape};
+            \node[box] (phenotype)          [below of=feature extr]         {Phenotype};
 
             \draw[->] (image) to (color correction);
             \draw[->] (color correction) -- (segmentation);
-            \draw[->] (color) -- (shape);
-            \draw[->] (shape) -- (phenotype);
+            \draw[->] (segmentation) -- (feature extr);
+            \draw[->] (feature extr) -- (phenotype);
 
             % Background for preprocessing.
             \begin{scope} [on background layer]
                 \node [fill=black!20,
                        fit=(color correction) (segmentation),
                        label=above:Preprocessing] {};
-                \draw[->] (4,-1) -- (5,-1);
             \end{scope}
 
             % Background for feature extraction.
             \begin{scope} [on background layer]
                 \node [fill=black!20,
-                       fit=(color) (shape),
+                       fit=(feature extr) (phenotype),
                        label=above:Feature Extraction] {};
             \end{scope}
         \end{tikzpicture}
