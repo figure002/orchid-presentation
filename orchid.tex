@@ -91,23 +91,17 @@
         \end{figure}
     \end{frame}
 
-    \subsection{Goal}
+    \subsection{Goals}
 
     \begin{frame}
-        \frametitle{Goal}
+        \frametitle{Goals}
 
-        Image fingerprinting and recognition for the taxonomic classification
-        of digital images.
-    \end{frame}
-
-    \begin{frame}
-        \frametitle{Outcomes}
-
-        \begin{enumerate}
-            \item A vetted digital image collection
-            \item Trained artificial neural networks
-            \item A library of generic image feature extraction algorithms
-            \item Training and classification methods
+		\begin{enumerate}
+			\item Simple reference image management strategies
+			\item Automated segmentation of digital images
+			\item Unassisted feature extraction algorithms
+			\item Neural Network Decision trees that mirror taxonomy
+			\item A user-friendly, proof-of-concept web application 
         \end{enumerate}
     \end{frame}
 
@@ -128,11 +122,11 @@
 
             \node[box] (client)                                {Client};
             \node[box] (prep)           [right of=client,
-                                        xshift=3cm]            {Prerocessing};
+                                        xshift=3cm]            {Preprocessing};
             \node[box] (feature_ext)    [below of=prep,
                                         yshift=1cm]            {Feature Extraction};
             \node[box] (ann)            [below of=feature_ext,
-                                        yshift=0.5cm]          {Neural Network};
+                                        yshift=0.5cm]          {Neural Networks};
 
             \draw[->] (client) -- (prep)
                 node[midway] {\includegraphics[width=.10\textwidth]{Paphiopedilum_druryi}};
@@ -205,11 +199,15 @@
             \item Image harvesting and selection
             \item Color correction
                 \begin{itemize}
-                    \item Naik \& Murthy (2003) Hue-preserving color image enhancement without gamut problem.
+                    \item \textbf{Naik \& Murthy}, 2003. Hue-preserving color image 
+                    enhancement without gamut problem. \textit{IEEE Transactions on
+                    Image Processing} \textbf{12}(12): 1591-1598
                 \end{itemize}
             \item Foreground segmentation
                 \begin{itemize}
-                    \item Rother, Kolmogorov \& Blake (2004) GrabCut: Interactive Foreground Extraction using Iterated Graph Cuts.
+                    \item \textbf{Rother, Kolmogorov \& Blake}, 2004. GrabCut: Interactive 
+                    Foreground Extraction using Iterated Graph Cuts. 
+                    \textit{ACM Trans. Graph.} \textbf{23}(3): 309-314
                 \end{itemize}
         \end{enumerate}
     \end{frame}
@@ -361,29 +359,32 @@
         \end{table}
     \end{frame}
 
-\section{Resultaten}
+\section{Results}
+	\begin{frame}
+		\frametitle{Results}
+        \begin{enumerate}
+            \item A vetted digital image collection
+            \item A library of generic image feature extraction algorithms
+            \item Trained artificial neural networks            
+            \item Training and classification methods
+            \item A proof-of-concept web application
+        \end{enumerate}		
+	\end{frame}
+		
 
-    \subsection{Conclusies}
-
+\section{Conclusions}
     \begin{frame}
-        \frametitle{Conclusies}
+        \frametitle{Conclusions}
 
         \begin{itemize}
             \item {TODO}
         \end{itemize}
     \end{frame}
 
-    \section*{Samenvatting}
 
-    \begin{frame}{Samenvatting}
-        \begin{itemize}
-            \item TODO
-        \end{itemize}
-    \end{frame}
+\section*{Acknowledgements}
 
-\section*{Met dank aan}
-
-    \begin{frame}{Met dank aan}
+    \begin{frame}{Acknowledgements}
 
         \begin{itemize}
             \item Dave Roberts
