@@ -61,6 +61,7 @@
 \tableofcontents
 \end{frame}
 
+
 \section{Introduction}
 
 	% context within which we do this project %
@@ -209,6 +210,27 @@
 
 \section{Methods}
 
+    \subsection{Image Harvesting}
+
+    \begin{frame}
+        \frametitle{Image Harvesting}
+
+        \begin{enumerate}
+            \item Photos are organized on a Flickr account
+            \item Image harvesting from Flickr via Flickr API
+            \item Photos and meta data are stored locally
+        \end{enumerate}
+    \end{frame}
+
+    \frame[plain]{
+        \frametitle{Photo Meta Data Database}
+
+        \begin{figure}[h]
+        \centering
+        \includegraphics[width=\textwidth]{meta-db-diagram}
+        \end{figure}
+    }
+
     \subsection{Image Processing}
 
     \begin{frame}[plain]
@@ -298,7 +320,6 @@
         \frametitle{Image Preprocessing}
 
         \begin{enumerate}
-            \item Image harvesting and selection
             \item Color correction
                 \begin{itemize}
                     \item \textbf{Naik \& Murthy}, 2003. Hue-preserving color image
@@ -397,17 +418,15 @@
         % Two horizontally aligned images.
         \begin{figure}[!htb]
             \minipage{0.50\textwidth}
-              \includegraphics[width=\linewidth]{BGR_means_hist_hor}
+              \includegraphics[width=\linewidth]{BGR_means_hor_plot}
             \endminipage\hfill
             \minipage{0.50\textwidth}
-              \includegraphics[width=\linewidth]{BGR_means_hist_ver}
+              \includegraphics[width=\linewidth]{BGR_means_ver_plot}
             \endminipage\hfill
         \end{figure}
     }
 
     \subsection{Neural Network Training}
-
-
 
     \begin{frame}
         \frametitle{Codewords}
@@ -431,7 +450,9 @@
         \end{table}
     \end{frame}
 
+
 \section{Results}
+
 	\begin{frame}
 		\frametitle{Results}
         \begin{enumerate}
@@ -445,6 +466,7 @@
 
 
 \section{Conclusions}
+
     \begin{frame}
         \frametitle{Conclusions}
 
