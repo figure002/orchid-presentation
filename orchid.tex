@@ -27,7 +27,7 @@
 \graphicspath{{./images/}}
 
 \title[OrchiD]
-    {OrchiD: identification of orchid species by means of image recognition}
+    {OrchiD: identification of orchid species by means of automated image recognition}
 
 \author[Gravendeel, Pereira, Vos]
     {Barbara Gravendeel\inst{1}, Serrano Pereira\inst{1}, Rutger Vos\inst{1}}
@@ -63,16 +63,131 @@
 
 \section{Introduction}
 
-    \subsection{Lady Slippers}
-
+	% context within which we do this project %
+	\subsection{Background}
+	\begin{frame}
+		\frametitle{Background}
+		\begin{itemize}
+			\item Natural historians, both private and institutional, have large 
+			collections of images
+			\item Detailed taxonomic expertise is rare and costly
+			\item Unassisted feature extraction (e.g. phenotyping) has broad applications
+			\item Automated classifiers might sometimes be `good enough' 
+		\end{itemize}	
+	\end{frame}	
+	
+	% explanation of what "unassisted feature extraction" actually is %
+	\begin{frame}
+		\frametitle{Unassisted feature extraction}
+		\begin{itemize}
+			\item Assisted feature extraction, e.g. by placing landmarks by hand, is
+			labour intensive and cannot scale
+			\item Many expert systems automate feature extraction to identify salient
+			details in an image. For example:
+			\begin{itemize}
+				\item Tissues in medical imaging
+				\item Pollen grains or forams in drilling cores
+				\item Faces of people
+			\end{itemize}
+		\end{itemize}	
+	\end{frame}
+	
+	% explanation of what "automated classifiers" are %
+	\begin{frame}
+		\frametitle{Automated classifiers}
+		\begin{itemize}
+			\item Automated classification of data using machine learning becomes more and
+			more important. For example:
+			\begin{itemize}
+				\item Spam filters
+				\item Automated stock trading
+				\item Character recognition
+			\end{itemize}
+			\item Artificial Neural Networks (ANNs) are one commonly-used approach
+		\end{itemize}	
+	\end{frame}
+	
+	% more information about ANNs %
     \begin{frame}
-        \frametitle{Lady Slippers}
+        \frametitle{Artificial Neural Networks}
 
-        \begin{enumerate}
+        % Space between neuron layers.
+        \def\layersep{2.5cm}
+        % Number of input neurons.
+        \def\inputneurons{4}
+        % Number of hidden neurons.
+        \def\hiddenneurons{5}
+        % Number of output neurons.
+        \def\outputneurons{3}
+
+        % Source: http://www.texample.net/tikz/examples/neural-network/
+        \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
+            \tikzstyle{every pin edge}=[<-,shorten <=1pt]
+            \tikzstyle{neuron}=[circle,fill=black!25,minimum size=17pt,inner sep=0pt]
+            \tikzstyle{input neuron}=[neuron, draw=green!75, fill=green!20];
+            \tikzstyle{hidden neuron}=[neuron, draw=blue!75, fill=blue!20];
+            \tikzstyle{output neuron}=[neuron, draw=red!75, fill=red!20];
+            \tikzstyle{annot} = [text width=4em, text centered]
+
+            % Draw the input layer nodes
+            \foreach \name / \y in {1,...,\inputneurons}
+            % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
+                \node[input neuron, pin=left:Input \y] (I-\name) at (0,-\y) {};
+
+            % Draw the hidden layer nodes
+            \foreach \name / \y in {1,...,\hiddenneurons}
+                \path[yshift=0.5cm]
+                    node [hidden neuron]
+                    (H-\name) at (\layersep,-\y cm) {};
+
+            % Draw the output layer node
+            \foreach \name / \y in {1,...,\outputneurons}
+                \path[yshift=-0.5cm]
+                    node [output neuron,
+                          pin={[pin edge={->}]right:Output \y},
+                          right of=H-\y]
+                        (O-\name) at (\layersep,-\y cm) {};
+
+            % Connect every node in the input layer with every node in the
+            % hidden layer.
+            \foreach \source in {1,...,\inputneurons}
+                \foreach \dest in {1,...,\hiddenneurons}
+                    \path (I-\source) edge (H-\dest);
+
+            % Connect every node in the hidden layer with the output layer
+            \foreach \source in {1,...,\hiddenneurons}
+                \foreach \dest in {1,...,\outputneurons}
+                    \path (H-\source) edge (O-\dest);
+
+            % Annotate the layers
+            \node[annot,above of=H-1, node distance=1cm] (hl) {Hidden layer};
+            \node[annot,left of=hl] {Input layer};
+            \node[annot,right of=hl] {Output layer};
+        \end{tikzpicture}
+    \end{frame}		 	
+
+	% outline of our goals %
+    \subsection{Goals}
+    \begin{frame}
+        \frametitle{Goals}
+		\begin{itemize}
+			\item Simple strategies for managing reference image sets
+			\item Automated segmentation and normalization of digital images
+			\item Unassisted feature extraction algorithms
+			\item ANN `decision trees' that mirror taxonomy
+			\item A user-friendly, proof-of-concept web application 
+        \end{itemize}
+    \end{frame}  
+
+	% description of the "study system", i.e. slipper orchids %
+	\subsection{Study system}
+    \begin{frame}        	
+        \frametitle{The Slipper Orchids (Cypripedioideae)}        
+        \begin{itemize}
             \item Horticulturally popular group
             \item Highly endangered in the wild
-            \item Well identifiable based on shape \& colors of flowers
-        \end{enumerate}
+            \item Well identifiable based on shape and flower colour
+        \end{itemize}
 
         % Three horizontally aligned images.
         \begin{figure}[!htb]
@@ -89,22 +204,13 @@
               \caption*{\textit{Paphiopedilum druryi}}
             \endminipage\hfill
         \end{figure}
-    \end{frame}
+    \end{frame}  
 
-    \subsection{Goals}
 
-    \begin{frame}
-        \frametitle{Goals}
+\section{Methods}
 
-		\begin{enumerate}
-			\item Simple reference image management strategies
-			\item Automated segmentation of digital images
-			\item Unassisted feature extraction algorithms
-			\item Neural Network Decision trees that mirror taxonomy
-			\item A user-friendly, proof-of-concept web application 
-        \end{enumerate}
-    \end{frame}
-
+    \subsection{Image Processing}
+    
     \begin{frame}[plain]
         \frametitle{Photo Classification Workflow}
 
@@ -143,11 +249,7 @@
                        label=above:Server] {};
             \end{scope}
         \end{tikzpicture}
-    \end{frame}
-
-\section{Methods}
-
-    \subsection{Image Processing}
+    \end{frame}    
 
     \begin{frame}[plain]
         \frametitle{Image Processing Workflow}
@@ -276,64 +378,6 @@
     \end{frame}
 
     \subsection{Neural Network Training}
-
-    \begin{frame}
-        \frametitle{Artificial Neural Networks}
-
-        % Space between neuron layers.
-        \def\layersep{2.5cm}
-        % Number of input neurons.
-        \def\inputneurons{4}
-        % Number of hidden neurons.
-        \def\hiddenneurons{5}
-        % Number of output neurons.
-        \def\outputneurons{3}
-
-        % Source: http://www.texample.net/tikz/examples/neural-network/
-        \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
-            \tikzstyle{every pin edge}=[<-,shorten <=1pt]
-            \tikzstyle{neuron}=[circle,fill=black!25,minimum size=17pt,inner sep=0pt]
-            \tikzstyle{input neuron}=[neuron, draw=green!75, fill=green!20];
-            \tikzstyle{hidden neuron}=[neuron, draw=blue!75, fill=blue!20];
-            \tikzstyle{output neuron}=[neuron, draw=red!75, fill=red!20];
-            \tikzstyle{annot} = [text width=4em, text centered]
-
-            % Draw the input layer nodes
-            \foreach \name / \y in {1,...,\inputneurons}
-            % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
-                \node[input neuron, pin=left:Input \y] (I-\name) at (0,-\y) {};
-
-            % Draw the hidden layer nodes
-            \foreach \name / \y in {1,...,\hiddenneurons}
-                \path[yshift=0.5cm]
-                    node [hidden neuron]
-                    (H-\name) at (\layersep,-\y cm) {};
-
-            % Draw the output layer node
-            \foreach \name / \y in {1,...,\outputneurons}
-                \path[yshift=-0.5cm]
-                    node [output neuron,
-                          pin={[pin edge={->}]right:Output \y},
-                          right of=H-\y]
-                        (O-\name) at (\layersep,-\y cm) {};
-
-            % Connect every node in the input layer with every node in the
-            % hidden layer.
-            \foreach \source in {1,...,\inputneurons}
-                \foreach \dest in {1,...,\hiddenneurons}
-                    \path (I-\source) edge (H-\dest);
-
-            % Connect every node in the hidden layer with the output layer
-            \foreach \source in {1,...,\hiddenneurons}
-                \foreach \dest in {1,...,\outputneurons}
-                    \path (H-\source) edge (O-\dest);
-
-            % Annotate the layers
-            \node[annot,above of=H-1, node distance=1cm] (hl) {Hidden layer};
-            \node[annot,left of=hl] {Input layer};
-            \node[annot,right of=hl] {Output layer};
-        \end{tikzpicture}
-    \end{frame}
 
 
 
