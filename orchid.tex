@@ -68,14 +68,14 @@
 	\begin{frame}
 		\frametitle{Background}
 		\begin{itemize}
-			\item Natural historians, both private and institutional, have large 
+			\item Natural historians, both private and institutional, have large
 			collections of images
 			\item Detailed taxonomic expertise is rare and costly
 			\item Unassisted feature extraction (e.g. phenotyping) has broad applications
-			\item Automated classifiers might sometimes be `good enough' 
-		\end{itemize}	
-	\end{frame}	
-	
+			\item Automated classifiers might sometimes be `good enough'
+		\end{itemize}
+	\end{frame}
+
 	% explanation of what "unassisted feature extraction" actually is %
 	\begin{frame}
 		\frametitle{Unassisted feature extraction}
@@ -89,9 +89,9 @@
 				\item Pollen grains or forams in drilling cores
 				\item Faces of people
 			\end{itemize}
-		\end{itemize}	
+		\end{itemize}
 	\end{frame}
-	
+
 	% explanation of what "automated classifiers" are %
 	\begin{frame}
 		\frametitle{Automated classifiers}
@@ -104,9 +104,9 @@
 				\item Character recognition
 			\end{itemize}
 			\item Artificial Neural Networks (ANNs) are one commonly-used approach
-		\end{itemize}	
+		\end{itemize}
 	\end{frame}
-	
+
 	% more information about ANNs %
     \begin{frame}
         \frametitle{Artificial Neural Networks}
@@ -164,7 +164,7 @@
             \node[annot,left of=hl] {Input layer};
             \node[annot,right of=hl] {Output layer};
         \end{tikzpicture}
-    \end{frame}		 	
+    \end{frame}
 
 	% outline of our goals %
     \subsection{Goals}
@@ -175,14 +175,14 @@
 			\item Automated segmentation and normalization of digital images
 			\item Unassisted feature extraction algorithms
 			\item ANN `decision trees' that mirror taxonomy
-			\item A user-friendly, proof-of-concept web application 
+			\item A user-friendly, proof-of-concept web application
         \end{itemize}
-    \end{frame}  
+    \end{frame}
 
 	% description of the "study system", i.e. slipper orchids %
 	\subsection{Study system}
-    \begin{frame}        	
-        \frametitle{The Slipper Orchids (Cypripedioideae)}        
+    \begin{frame}
+        \frametitle{The Slipper Orchids (Cypripedioideae)}
         \begin{itemize}
             \item Horticulturally popular group
             \item Highly endangered in the wild
@@ -204,13 +204,13 @@
               \caption*{\textit{Paphiopedilum druryi}}
             \endminipage\hfill
         \end{figure}
-    \end{frame}  
+    \end{frame}
 
 
 \section{Methods}
 
     \subsection{Image Processing}
-    
+
     \begin{frame}[plain]
         \frametitle{Photo Classification Workflow}
 
@@ -249,7 +249,7 @@
                        label=above:Server] {};
             \end{scope}
         \end{tikzpicture}
-    \end{frame}    
+    \end{frame}
 
     \begin{frame}[plain]
         \frametitle{Image Processing Workflow}
@@ -273,7 +273,7 @@
                                             xshift=1cm]                     {Color \& Shape};
             \node[box] (phenotype)          [below of=feature extr]         {Phenotype};
 
-            \draw[->] (image) to (color correction);
+            \draw[->] (image) -- (color correction);
             \draw[->] (color correction) -- (segmentation);
             \draw[->] (segmentation) -- (feature extr);
             \draw[->] (feature extr) -- (phenotype);
@@ -301,14 +301,14 @@
             \item Image harvesting and selection
             \item Color correction
                 \begin{itemize}
-                    \item \textbf{Naik \& Murthy}, 2003. Hue-preserving color image 
+                    \item \textbf{Naik \& Murthy}, 2003. Hue-preserving color image
                     enhancement without gamut problem. \textit{IEEE Transactions on
                     Image Processing} \textbf{12}(12): 1591-1598
                 \end{itemize}
             \item Foreground segmentation
                 \begin{itemize}
-                    \item \textbf{Rother, Kolmogorov \& Blake}, 2004. GrabCut: Interactive 
-                    Foreground Extraction using Iterated Graph Cuts. 
+                    \item \textbf{Rother, Kolmogorov \& Blake}, 2004. GrabCut: Interactive
+                    Foreground Extraction using Iterated Graph Cuts.
                     \textit{ACM Trans. Graph.} \textbf{23}(3): 309-314
                 \end{itemize}
         \end{enumerate}
@@ -382,6 +382,14 @@
         \end{figure}
     \end{frame}
 
+    \frame[plain]{
+        \frametitle{Color and Shape Extraction}
+
+        \begin{figure}[h]
+        \centering
+        \includegraphics[width=.60\textwidth]{BGR_means_bins}
+        \end{figure}
+    }
 
     \frame[plain]{
         \frametitle{Color and Shape Extraction}
@@ -389,10 +397,10 @@
         % Two horizontally aligned images.
         \begin{figure}[!htb]
             \minipage{0.50\textwidth}
-              \includegraphics[width=\linewidth]{bgr-hist-hor}
+              \includegraphics[width=\linewidth]{BGR_means_hist_hor}
             \endminipage\hfill
             \minipage{0.50\textwidth}
-              \includegraphics[width=\linewidth]{bgr-hist-ver}
+              \includegraphics[width=\linewidth]{BGR_means_hist_ver}
             \endminipage\hfill
         \end{figure}
     }
@@ -429,12 +437,12 @@
         \begin{enumerate}
             \item A vetted digital image collection
             \item A library of generic image feature extraction algorithms
-            \item Trained artificial neural networks            
+            \item Trained artificial neural networks
             \item Training and classification methods
             \item A proof-of-concept web application
-        \end{enumerate}		
+        \end{enumerate}
 	\end{frame}
-		
+
 
 \section{Conclusions}
     \begin{frame}
