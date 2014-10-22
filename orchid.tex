@@ -6,6 +6,24 @@
     \usetheme{Berlin}
     \usecolortheme{default}
     \useinnertheme{circles}
+
+    % Define Naturalis colours.
+    \definecolor{npink}{HTML}{EE0059}
+    \definecolor{nbrown}{HTML}{542E08}
+    \definecolor{ngreen}{HTML}{009932}
+    \definecolor{ngray}{HTML}{EEEDE9}
+
+    \setbeamercolor{normal text}{fg=black,bg=ngray}
+    \setbeamercolor{alerted text}{fg=ngreen}
+    \setbeamercolor{example text}{fg=ngreen!50!black}
+
+    \setbeamercolor{structure}{fg=npink} % Main structure highlight colours
+    \setbeamercolor{background canvas}{parent=normal text}
+    \setbeamercolor{background}{parent=background canvas}
+
+    \setbeamercolor{palette primary}{fg=white,bg=npink} % Title bar
+    \setbeamercolor{palette secondary}{use=structure,fg=white} % Section bar
+    \setbeamercolor{palette tertiary}{fg=ngray,bg=black} % Navigation bar
 }
 
 \usepackage[english]{babel} % apt-get install texlive-lang-english
@@ -222,7 +240,7 @@
         \end{itemize}
     \end{frame}
 
-    \begin{frame}[plain]
+    \begin{frame}
         \frametitle{Photo Meta Data Database}
 
         \begin{figure}[h]
