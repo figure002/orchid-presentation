@@ -32,6 +32,7 @@
 \usepackage{booktabs} % Pretty rules for tables
 \usepackage{enumerate} % Enumerated lists
 \usepackage{graphicx} % Loading images
+\usepackage{textpos}
 \usepackage{wrapfig} % Wrapping text around images
 \usepackage{caption} % Advanced features for image/table captions
 \usepackage{tikz} % Drawing diagrams
@@ -41,7 +42,7 @@
 \captionsetup{margin=10pt,font=scriptsize,labelfont=bf,labelsep=colon}
 
 % For including images
-\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg,.eps}
 \graphicspath{{./images/}}
 
 \title[OrchiD]
@@ -55,6 +56,8 @@
   \inst{1}
   Naturalis Biodiversity Center, The Netherlands
 }
+
+%\logo{\includegraphics[height=1cm]{Naturalis_logo_staand_rood}}
 
 \date{October 23, 2014}
 
@@ -72,6 +75,13 @@
 
 % Title page
 \frame{\titlepage}
+
+% Add logo to title bar
+\addtobeamertemplate{frametitle}{}{
+    \begin{textblock*}{2cm}(\textwidth, -0.9cm)
+        \includegraphics[height=0.8cm]{Naturalis_logo_small}
+    \end{textblock*}
+}
 
 % ToC
 \begin{frame}
