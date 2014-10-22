@@ -429,6 +429,26 @@
     \subsection{Neural Network Training}
 
     \begin{frame}
+        \frametitle{Training Data}
+
+        Format of the training data.
+
+        \begin{table}[h]\scriptsize
+            \begin{center}
+            \begin{tabular}{lllllll}
+            \toprule
+            ID & 1.HOR.B & 1.HOR.G & 1.HOR.R & 1.VER.B & 1.VER.G & 1.VER.R \\
+            \midrule
+            15521194721 & -1 & -1 & -1 & -0.858 & -0.858 & -0.858 \\
+            15501195436 & -1 & -1 & -1 & -0.921 & -0.913 & -0.913 \\
+            14325862838 & -0.984 & -0.984 & -0.984 & -0.952 & -0.952 & -0.960 \\
+            \bottomrule
+            \end{tabular}
+            \end{center}
+        \end{table}
+    \end{frame}
+
+    \begin{frame}
         \frametitle{Codewords}
 
         Codewords used for training artificial neural networks.
@@ -453,8 +473,11 @@
 
 \section{Results}
 
-	\begin{frame}
-		\frametitle{Results}
+    \subsection{Outcomes}
+
+    \begin{frame}
+        \frametitle{Results}
+
         \begin{enumerate}
             \item A vetted digital image collection
             \item A library of generic image feature extraction algorithms
@@ -462,7 +485,75 @@
             \item Training and classification methods
             \item A proof-of-concept web application
         \end{enumerate}
-	\end{frame}
+    \end{frame}
+
+    \subsection{Image Collection}
+
+    \begin{frame}[plain]
+        \frametitle{Image Collection}
+
+        In total 1127 photos were collected.
+
+        \begin{table}[h]\scriptsize
+            \begin{center}
+            \begin{tabular}{llll}
+            \toprule
+            \textbf{Genus} & \textbf{Section Count} & \textbf{Species Count} & \textbf{Photo Count} \\
+            \midrule
+            \textit{Cypripedium} & 11 & 23 & 141 \\
+            \textit{Mexipedium} & 0 & 1 & 4 \\
+            \textit{Paphiopedilum} & 7 & 71 & 889 \\
+            \textit{Phragmipedium} & 4 & 19 & 89 \\
+            \textit{Selenipedium} & 0 & 1 & 4 \\
+            \bottomrule
+            \end{tabular}
+            \end{center}
+        \end{table}
+    \end{frame}
+
+    \begin{frame}[plain]
+        \frametitle{Image Collection}
+
+        A subset of the photo collection with 84 selected photos.
+
+        \begin{table}[h]\scriptsize
+            \begin{center}
+            \begin{tabular}{llll}
+            \toprule
+            \textbf{Genus} & \textbf{Section Count} & \textbf{Species Count} & \textbf{Photo Count} \\
+            \midrule
+            \textit{Cypripedium} & 3 & 4 & 25 \\
+            \textit{Mexipedium} & 0 & 1 & 4 \\
+            \textit{Paphiopedilum} & 3 & 4 & 31 \\
+            \textit{Phragmipedium} & 1 & 3 & 20 \\
+            \textit{Selenipedium} & 0 & 1 & 4 \\
+            \bottomrule
+            \end{tabular}
+            \end{center}
+        \end{table}
+    \end{frame}
+
+    \subsection{Cross Validation}
+
+    \begin{frame}
+        \frametitle{K-fold Cross Validation}
+
+        Results for stratified k-fold cross validations.
+
+        \begin{table}[h]\scriptsize
+            \begin{center}
+            \begin{tabular}{lp{3cm}p{3cm}}
+            \toprule
+            \textbf{Precision} & \textbf{Accuracy{\newline}k=4} & \textbf{Accuracy (subset){\newline}k=4} \\
+            \midrule
+            genus                   & 75\% ({$\sigma$} 3 pp)    & 80\% ({$\sigma$} 9 pp) \\
+            genus/section           & 46\% ({$\sigma$} 7 pp)    & 61\% ({$\sigma$} 10 pp) \\
+            genus/section/species   & 19\% ({$\sigma$} 5 pp)    & 46\% ({$\sigma$} 11 pp) \\
+            \bottomrule
+            \end{tabular}
+            \end{center}
+        \end{table}
+    \end{frame}
 
 
 \section{Conclusions}
