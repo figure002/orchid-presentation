@@ -13,10 +13,10 @@
 \usepackage[T1]{fontenc}
 \usepackage{booktabs} % Pretty rules for tables
 \usepackage{enumerate} % Enumerated lists
-\usepackage{graphicx}
+\usepackage{graphicx} % Loading images
 \usepackage{wrapfig} % Wrapping text around images
 \usepackage{caption} % Advanced features for image/table captions
-\usepackage{tikz}
+\usepackage{tikz} % Drawing diagrams
 \usetikzlibrary{arrows,backgrounds,fit,shapes}
 
 % Configure caption
@@ -451,7 +451,7 @@
     \begin{frame}
         \frametitle{Codewords}
 
-        Codewords used for training artificial neural networks.
+        Codewords used for training.
 
         \begin{table}[h]\scriptsize
             \begin{center}
@@ -468,6 +468,39 @@
             \end{tabular}
             \end{center}
         \end{table}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Hierarchial Training and Classification}
+
+        \begin{enumerate}
+            \item One neural network per classification step
+            \item Follow taxonmic hierarchy:
+            \begin{enumerate}
+                \item Genus -- one neural network
+                \item Section -- one neural network per genus
+                \item Species -- one neural network per section
+            \end{enumerate}
+
+        \vspace{10 mm}
+
+        \begin{tikzpicture}[node distance=3cm,
+                            thick,
+                            rounded corners=2pt]
+            \tikzstyle{box}=[rectangle,
+                            minimum size=6mm,
+                            draw=black!50 ,
+                            top color=white ,
+                            bottom color=black!20]
+
+            \node[box] (genus) {Genus};
+            \node[box] (section) [right of=genus] {Section};
+            \node[box] (species) [right of=section] {Species};
+
+            \draw[->] (genus) -- (section);
+            \draw[->] (section) -- (species);
+        \end{tikzpicture}
+        \end{enumerate}
     \end{frame}
 
 
@@ -544,7 +577,7 @@
             \begin{center}
             \begin{tabular}{lp{3cm}p{3cm}}
             \toprule
-            \textbf{Precision} & \textbf{Accuracy{\newline}k=4} & \textbf{Accuracy (subset){\newline}k=4} \\
+            \textbf{Classification Precision} & \textbf{Accuracy{\newline}k=4} & \textbf{Accuracy (subset){\newline}k=4} \\
             \midrule
             genus                   & 75\% ({$\sigma$} 3 pp)    & 80\% ({$\sigma$} 9 pp) \\
             genus/section           & 46\% ({$\sigma$} 7 pp)    & 61\% ({$\sigma$} 10 pp) \\
