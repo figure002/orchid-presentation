@@ -57,8 +57,9 @@
 
 % ToC
 \begin{frame}
-\frametitle{Contents}
-\tableofcontents
+    \frametitle{Contents}
+
+    \tableofcontents
 \end{frame}
 
 
@@ -215,21 +216,21 @@
     \begin{frame}
         \frametitle{Image Harvesting}
 
-        \begin{enumerate}
+        \begin{itemize}
             \item Photos are organized on a Flickr account
-            \item Image harvesting from Flickr via Flickr API
+            \item Automated image harvesting from Flickr via custom tool
             \item Photos and meta data are stored locally
-        \end{enumerate}
+        \end{itemize}
     \end{frame}
 
-    \frame[plain]{
+    \begin{frame}[plain]
         \frametitle{Photo Meta Data Database}
 
         \begin{figure}[h]
         \centering
         \includegraphics[width=\textwidth]{meta-db-diagram}
         \end{figure}
-    }
+    \end{frame}
 
     \subsection{Image Processing}
 
@@ -289,10 +290,10 @@
             \tikzstyle{img}=[inner sep=0pt]
 
             \node[img] (image) {\includegraphics[width=.10\textwidth]{Paphiopedilum_druryi}};
-            \node[box] (color correction)   [right of=image]                {Color Correction};
+            \node[box] (color correction)   [right of=image]                {Colour Correction};
             \node[box] (segmentation)       [below of=color correction]     {Segmentation};
             \node[box] (feature extr)       [right of=color correction,
-                                            xshift=1cm]                     {Color \& Shape};
+                                            xshift=1cm]                     {Colour \& Shape};
             \node[box] (phenotype)          [below of=feature extr]         {Phenotype};
 
             \draw[->] (image) -- (color correction);
@@ -335,64 +336,64 @@
         \end{enumerate}
     \end{frame}
 
-    \frame[plain]{
+    \begin{frame}[plain]
         \frametitle{Segmentation via GrabCut}
 
         \begin{figure}[h]
         \centering
         \includegraphics[width=.60\textwidth]{GrabCut_druryi_1}
         \end{figure}
-    }
+    \end{frame}
 
-    \frame[plain]{
+    \begin{frame}[plain]
         \frametitle{Segmentation via GrabCut}
 
         \begin{figure}[h]
         \centering
         \includegraphics[width=.60\textwidth]{GrabCut_druryi_2}
         \end{figure}
-    }
+    \end{frame}
 
-    \frame[plain]{
+    \begin{frame}[plain]
         \frametitle{Segmentation via GrabCut}
 
         \begin{figure}[h]
         \centering
         \includegraphics[width=.60\textwidth]{GrabCut_druryi_3}
         \end{figure}
-    }
+    \end{frame}
 
-    \frame[plain]{
+    \begin{frame}[plain]
         \frametitle{Segmentation via GrabCut}
 
         \begin{figure}[h]
         \centering
         \includegraphics[width=.60\textwidth]{GrabCut_xerophyticum_1}
         \end{figure}
-    }
+    \end{frame}
 
-    \frame[plain]{
+    \begin{frame}[plain]
         \frametitle{Segmentation via GrabCut}
 
         \begin{figure}[h]
         \centering
         \includegraphics[width=.60\textwidth]{GrabCut_xerophyticum_2}
         \end{figure}
-    }
+    \end{frame}
 
-    \frame[plain]{
+    \begin{frame}[plain]
         \frametitle{Segmentation via GrabCut}
 
         \begin{figure}[h]
         \centering
         \includegraphics[width=.60\textwidth]{GrabCut_xerophyticum_3}
         \end{figure}
-    }
+    \end{frame}
 
     \begin{frame}
         \frametitle{Feature Extraction}
 
-        Features (color \& shape) are extracted from the segmented images.
+        Features (colour \& shape) are extracted from the segmented images.
 
         \vspace{10 mm}
 
@@ -403,17 +404,17 @@
         \end{figure}
     \end{frame}
 
-    \frame[plain]{
-        \frametitle{Color and Shape Extraction}
+    \begin{frame}[plain]
+        \frametitle{Colour and Shape Extraction}
 
         \begin{figure}[h]
         \centering
         \includegraphics[width=.60\textwidth]{BGR_means_bins}
         \end{figure}
-    }
+    \end{frame}
 
-    \frame[plain]{
-        \frametitle{Color and Shape Extraction}
+    \begin{frame}[plain]
+        \frametitle{Colour and Shape Extraction}
 
         % Two horizontally aligned images.
         \begin{figure}[!htb]
@@ -424,7 +425,7 @@
               \includegraphics[width=\linewidth]{BGR_means_ver_plot}
             \endminipage\hfill
         \end{figure}
-    }
+    \end{frame}
 
     \subsection{Neural Network Training}
 
@@ -471,36 +472,36 @@
     \end{frame}
 
     \begin{frame}
-        \frametitle{Hierarchial Training and Classification}
+        \frametitle{Hierarchical Training and Classification}
 
-        \begin{enumerate}
+        \begin{itemize}
             \item One neural network per classification step
-            \item Follow taxonmic hierarchy:
+            \item Follow taxonomic hierarchy:
             \begin{enumerate}
                 \item Genus -- one neural network
                 \item Section -- one neural network per genus
                 \item Species -- one neural network per section
+
+                \vspace{10 mm}
+
+                \begin{tikzpicture}[node distance=3cm,
+                                    thick,
+                                    rounded corners=2pt]
+                    \tikzstyle{box}=[rectangle,
+                                    minimum size=6mm,
+                                    draw=black!50 ,
+                                    top color=white ,
+                                    bottom color=black!20]
+
+                    \node[box] (genus) {Genus};
+                    \node[box] (section) [right of=genus] {Section};
+                    \node[box] (species) [right of=section] {Species};
+
+                    \draw[->] (genus) -- (section);
+                    \draw[->] (section) -- (species);
+                \end{tikzpicture}
             \end{enumerate}
-
-        \vspace{10 mm}
-
-        \begin{tikzpicture}[node distance=3cm,
-                            thick,
-                            rounded corners=2pt]
-            \tikzstyle{box}=[rectangle,
-                            minimum size=6mm,
-                            draw=black!50 ,
-                            top color=white ,
-                            bottom color=black!20]
-
-            \node[box] (genus) {Genus};
-            \node[box] (section) [right of=genus] {Section};
-            \node[box] (species) [right of=section] {Species};
-
-            \draw[->] (genus) -- (section);
-            \draw[->] (section) -- (species);
-        \end{tikzpicture}
-        \end{enumerate}
+        \end{itemize}
     \end{frame}
 
 
@@ -512,6 +513,7 @@
         \frametitle{Results}
 
         \begin{enumerate}
+            \item Flickr image harvesting tool
             \item A vetted digital image collection
             \item A library of generic image feature extraction algorithms
             \item Trained artificial neural networks
@@ -609,7 +611,7 @@
             \item Hanneke de Wolf
             \item Naturalis Applied Research grant
             \item Patrick Wijntjes
-            \item 50+ fotografen
+            \item 50+ photographers
         \end{itemize}
     \end{frame}
 
