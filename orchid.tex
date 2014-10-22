@@ -56,7 +56,7 @@
   Naturalis Biodiversity Center, The Netherlands
 }
 
-\date{November 15, 2014}
+\date{October 23, 2014}
 
 \subject{Bioinformatics}
 
@@ -254,8 +254,8 @@
     \begin{frame}[plain]
         \frametitle{Photo Classification Workflow}
 
+        \begin{center}
         \begin{tikzpicture}[node distance=3cm,
-                            >=stealth,
                             thick,
                             rounded corners=2pt,
                             auto]
@@ -289,13 +289,14 @@
                        label=above:Server] {};
             \end{scope}
         \end{tikzpicture}
+        \end{center}
     \end{frame}
 
     \begin{frame}[plain]
         \frametitle{Image Processing Workflow}
 
+        \begin{center}
         \begin{tikzpicture}[node distance=3cm,
-                            >=stealth,
                             thick,
                             rounded corners=2pt,
                             auto]
@@ -332,6 +333,7 @@
                        label=above:Feature Extraction] {};
             \end{scope}
         \end{tikzpicture}
+        \end{center}
     \end{frame}
 
     \begin{frame}
@@ -441,7 +443,7 @@
     \end{frame}
 
     \begin{frame}
-        \frametitle{Codewords}
+        \frametitle{Training Data}
 
         Codewords used for training.
 
@@ -463,18 +465,12 @@
     \end{frame}
 
     \begin{frame}
-        \frametitle{Hierarchical Training and Classification}
+        \frametitle{Training and Classification}
 
-        ANN `decision trees' that mirror taxonomy.
+        \begin{itemize}
+            \item ANN `decision trees' that mirror taxonomy{\newline}
 
-        \begin{enumerate}
-            \item Genus -- one neural network
-            \item Section -- one neural network per genus
-            \item Species -- one neural network per section
-
-            \vspace{10 mm}
-
-            \begin{tikzpicture}[node distance=3cm,
+            \begin{tikzpicture}[node distance=2cm,
                                 thick,
                                 rounded corners=2pt]
                 \tikzstyle{box}=[rectangle,
@@ -490,15 +486,14 @@
                 \draw[->] (genus) -- (section);
                 \draw[->] (section) -- (species);
             \end{tikzpicture}
-        \end{enumerate}
-    \end{frame}
 
-    \begin{frame}
-        \frametitle{Training Methods}
+            \vspace{5 mm}
 
-        \begin{itemize}
-            \item Standard training
-            \item Training via genetic algorithm
+        \item Training methods:
+            \begin{itemize}
+                \item Standard training
+                \item Training via genetic algorithm
+            \end{itemize}
         \end{itemize}
     \end{frame}
 
