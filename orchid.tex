@@ -478,6 +478,15 @@
         \end{itemize}
     \end{frame}
 
+    \begin{frame}
+        \frametitle{Training Methods}
+
+        \begin{itemize}
+            \item Standard training
+            \item Training via genetic algorithm
+        \end{itemize}
+    \end{frame}
+
 
 \section{Results}
 
@@ -566,11 +575,13 @@
     \begin{frame}
         \frametitle{Tools}
 
-        \begin{itemize}
-            \item ImgPheno: a library of generic image feature extraction algorithms
-            \item NBClassify: image harvesting, training, and classification tools
-            \item OrchiD: a proof-of-concept web application
-        \end{itemize}
+        \begin{description}[Tools]
+            \item[\texttt{AI::FANN::Evolving}] Evolve optimal neural networks.
+            \item[\texttt{ImgPheno}] Library of generic image feature extraction algorithms.
+            \item[\texttt{NBClassify}] Image harvesting, training, and classification tools.
+            \item[\texttt{OrchiD}] Proof-of-concept web application.
+        \end{description}
+
     \end{frame}
 
     \begin{frame}[plain]
@@ -608,7 +619,21 @@
         \frametitle{Conclusions}
 
         \begin{itemize}
-            \item {TODO}
+            \item Classification accuracy needs improvement:
+            \begin{itemize}
+                \item Training via genetic algorithm
+                \item Manually preprocess images for training
+                \item Combinations of multiple features
+                \item Increase Hamming distances for codewords
+                \item Neural network committees
+            \end{itemize}
+        \end{itemize}
+
+        \begin{itemize}
+            \item Outlook
+            \begin{itemize}
+                \item OrchiD: Mobile App
+            \end{itemize}
         \end{itemize}
     \end{frame}
 
