@@ -45,7 +45,7 @@
 % Show ToC at beginning of each section
 \AtBeginSubsection[]
 {
-  \begin{frame}<beamer>{Introduction}
+  \begin{frame}<beamer>{Outline}
     \tableofcontents[currentsection,currentsubsection]
   \end{frame}
 }
@@ -57,8 +57,7 @@
 
 % ToC
 \begin{frame}
-    \frametitle{Contents}
-
+    \frametitle{Outline}
     \tableofcontents
 \end{frame}
 
@@ -218,7 +217,7 @@
 
         \begin{itemize}
             \item Photos are organized on a Flickr account
-            \item Automated image harvesting from Flickr via custom tool
+            \item Automated image harvesting from Flickr
             \item Photos and meta data are stored locally
         \end{itemize}
     \end{frame}
@@ -448,34 +447,32 @@
     \begin{frame}
         \frametitle{Hierarchical Training and Classification}
 
-        \begin{itemize}
-            \item One neural network per classification step
-            \item Follow taxonomic hierarchy:
-            \begin{enumerate}
-                \item Genus -- one neural network
-                \item Section -- one neural network per genus
-                \item Species -- one neural network per section
+        ANN `decision trees' that mirror taxonomy.
 
-                \vspace{10 mm}
+        \begin{enumerate}
+            \item Genus -- one neural network
+            \item Section -- one neural network per genus
+            \item Species -- one neural network per section
 
-                \begin{tikzpicture}[node distance=3cm,
-                                    thick,
-                                    rounded corners=2pt]
-                    \tikzstyle{box}=[rectangle,
-                                    minimum size=6mm,
-                                    draw=black!50 ,
-                                    top color=white ,
-                                    bottom color=black!20]
+            \vspace{10 mm}
 
-                    \node[box] (genus) {Genus};
-                    \node[box] (section) [right of=genus] {Section};
-                    \node[box] (species) [right of=section] {Species};
+            \begin{tikzpicture}[node distance=3cm,
+                                thick,
+                                rounded corners=2pt]
+                \tikzstyle{box}=[rectangle,
+                                minimum size=6mm,
+                                draw=black!50 ,
+                                top color=white ,
+                                bottom color=black!20]
 
-                    \draw[->] (genus) -- (section);
-                    \draw[->] (section) -- (species);
-                \end{tikzpicture}
-            \end{enumerate}
-        \end{itemize}
+                \node[box] (genus) {Genus};
+                \node[box] (section) [right of=genus] {Section};
+                \node[box] (species) [right of=section] {Species};
+
+                \draw[->] (genus) -- (section);
+                \draw[->] (section) -- (species);
+            \end{tikzpicture}
+        \end{enumerate}
     \end{frame}
 
     \begin{frame}
@@ -575,8 +572,8 @@
     \begin{frame}
         \frametitle{Tools}
 
-        \begin{description}[Tools]
-            \item[\texttt{AI::FANN::Evolving}] Evolve optimal neural networks.
+        \begin{description}[\texttt{NBClassify}]
+            \item[\texttt{AIvolver}] Evolve optimal neural networks.
             \item[\texttt{ImgPheno}] Library of generic image feature extraction algorithms.
             \item[\texttt{NBClassify}] Image harvesting, training, and classification tools.
             \item[\texttt{OrchiD}] Proof-of-concept web application.
