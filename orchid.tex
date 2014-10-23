@@ -242,12 +242,23 @@
     \subsection{Image Management}
     \begin{frame}
         \frametitle{Image Management}
-        \begin{itemize}
-            \item Images are collaboratively organized (tagged, copyrights tracked) on 
-            a Flickr account
-            \item Image sets are automatically harvested and mirrored locally
-            \item Additional meta data, extracted features and images are stored locally
-        \end{itemize}
+
+        \begin{minipage}[c]{\textwidth}
+            \begin{columns}[T]
+                \begin{column}{0.6\textwidth}
+                    \begin{itemize}
+                        \item Images are collaboratively organized (tagged, copyrights tracked) on
+                        a Flickr account
+                        \item Image sets are automatically harvested and mirrored locally
+                        \item Additional meta data, extracted features and images are stored locally
+                    \end{itemize}
+                \end{column}
+                \begin{column}{0.3\textwidth}
+                    \includegraphics[width=3.5cm]{flickr_metadata}
+                \end{column}
+            \end{columns}
+        \end{minipage}
+
     \end{frame}
 
 	% database schema %
@@ -259,10 +270,10 @@
         \end{figure}
     \end{frame}
 
-    
+
     % image processing (multiple slides) %
     \subsection{Image Processing}
-    
+
     \begin{frame}[plain]
         \frametitle{Photo Classification Workflow}
         \begin{center}
