@@ -238,32 +238,33 @@
 
 \section{Methods}
 
-    \subsection{Image Harvesting}
-
+	% intro slide about how we manage the images %
+    \subsection{Image Management}
     \begin{frame}
-        \frametitle{Image Harvesting}
-
+        \frametitle{Image Management}
         \begin{itemize}
-            \item Photos are organized on a Flickr account
-            \item Automated image harvesting from Flickr
-            \item Photos and meta data are stored locally
+            \item Images are collaboratively organized (tagged, copyrights tracked) on 
+            a Flickr account
+            \item Image sets are automatically harvested and mirrored locally
+            \item Additional meta data, extracted features and images are stored locally
         \end{itemize}
     \end{frame}
 
+	% database schema %
     \begin{frame}
-        \frametitle{Photo Meta Data Database}
-
+        \frametitle{Photo Metadata DB}
         \begin{figure}[h]
         \centering
         \includegraphics[width=\textwidth]{meta-db-diagram}
         \end{figure}
     \end{frame}
 
+    
+    % image processing (multiple slides) %
     \subsection{Image Processing}
-
+    
     \begin{frame}[plain]
         \frametitle{Photo Classification Workflow}
-
         \begin{center}
         \begin{tikzpicture}[node distance=3cm,
                             thick,
@@ -304,7 +305,6 @@
 
     \begin{frame}[plain]
         \frametitle{Image Processing Workflow}
-
         \begin{center}
         \begin{tikzpicture}[node distance=3cm,
                             thick,
@@ -348,7 +348,6 @@
 
     \begin{frame}
         \frametitle{Image Preprocessing}
-
         \begin{enumerate}
             \item Color correction
                 \begin{itemize}
@@ -367,7 +366,6 @@
 
     \begin{frame}[plain]
         \frametitle{Segmentation via GrabCut}
-
         \begin{center}
         \begin{tikzpicture}
           \node (img1) {\includegraphics[height=5cm]{GrabCut_druryi_1}};
@@ -381,7 +379,6 @@
 
     \begin{frame}[plain]
         \frametitle{Segmentation via GrabCut}
-
         \begin{center}
         \begin{tikzpicture}
           \node (img1) {\includegraphics[height=5cm]{GrabCut_xerophyticum_1}};
@@ -409,7 +406,6 @@
 
     \begin{frame}[plain]
         \frametitle{Colour and Shape Extraction}
-
         \begin{figure}[h]
         \centering
         \includegraphics[width=.60\textwidth]{BGR_means_bins}
