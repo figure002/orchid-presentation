@@ -26,6 +26,9 @@
     \setbeamercolor{palette tertiary}{fg=ngray,bg=black} % Navigation bar
 }
 
+% Uncomment to see the slide notes.
+%\setbeameroption{show notes}
+
 \usepackage[english]{babel} % apt-get install texlive-lang-english
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -59,7 +62,7 @@
 
 %\logo{\includegraphics[height=1cm]{Naturalis_logo_staand_rood}}
 
-\date{October 23, 2014}
+\date{November 15, 2014}
 
 \subject{Bioinformatics}
 
@@ -121,7 +124,26 @@
 		\end{itemize}
 	\end{frame}
 
-	% explanation of what "automated classifiers" are %
+
+    \begin{frame}[plain]
+        \frametitle{Landmarking}
+
+        \begin{figure}[!htb]
+            \minipage{0.8\textwidth}
+              \includegraphics[width=\linewidth]{Timotheus_2010_MicroCT_landmarks}
+              \caption*{MicroCT scanning and landmarking of \textit{Satyrium} flowers.\footnotemark}
+            \endminipage\hfill
+        \end{figure}
+
+        % Footnote for the paper.
+        \footnotetext[1]{\textbf{Van der Niet et al.} 2010. Three-dimensional geometric
+        morphometrics for studying floral shape variation.
+        \textit{Trends Plant Sci.} \textbf{15}(8): 423-6}
+    \end{frame}
+
+    \note{Explain what landmarks are (from the previous slide).}
+    \note{Photo from Van der Niet et al. Three-dimensional geometric morphometrics for studying floral shape variation. Trends Plant Sci. 15, 423–6 (2010).}
+
 	\begin{frame}
 		\frametitle{Automated classifiers}
 		\begin{itemize}
@@ -135,6 +157,7 @@
 			\item Artificial Neural Networks (ANNs) are one commonly-used approach
 		\end{itemize}
 	\end{frame}
+    \note{Explanation of what automated classifiers are.}
 
 	% more information about ANNs %
     \begin{frame}
@@ -150,6 +173,7 @@
         \def\outputneurons{3}
 
         % Source: http://www.texample.net/tikz/examples/neural-network/
+        \begin{center}
         \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
             \tikzstyle{every pin edge}=[<-,shorten <=1pt]
             \tikzstyle{neuron}=[circle,fill=black!25,minimum size=17pt,inner sep=0pt]
@@ -193,6 +217,7 @@
             \node[annot,left of=hl] {Input layer};
             \node[annot,right of=hl] {Output layer};
         \end{tikzpicture}
+        \end{center}
     \end{frame}
 
 	% outline of our goals %
@@ -214,7 +239,7 @@
         \frametitle{The Slipper Orchids (Cypripedioideae)}
         \begin{itemize}
             \item Horticulturally popular group
-            \item Highly endangered in the wild
+            \item Many are highly endangered in the wild
             \item Well identifiable based on shape and flower colour
         \end{itemize}
 
@@ -249,6 +274,7 @@
                     \begin{itemize}
                         \item Images are collaboratively organized (tagged, copyrights tracked) on
                         a Flickr account
+                        \item Photos used with consent from the photographers
                         \item Image sets are automatically harvested and mirrored locally
                         \item Additional meta data, extracted features and images are stored locally
                     \end{itemize}
@@ -258,18 +284,17 @@
                 \end{column}
             \end{columns}
         \end{minipage}
-
     \end{frame}
+    \note{Mention that the orchid classifications originate from phylogenetic inference from molecular data.}
 
-	% database schema %
-    \begin{frame}
-        \frametitle{Photo Metadata DB}
-        \begin{figure}[h]
-        \centering
-        \includegraphics[width=\textwidth]{meta-db-diagram}
-        \end{figure}
-    \end{frame}
-
+    % database schema %
+    %\begin{frame}
+    %    \frametitle{Photo Metadata DB}
+    %    \begin{figure}[h]
+    %    \centering
+    %    \includegraphics[width=\textwidth]{meta-db-diagram}
+    %    \end{figure}
+    %\end{frame}
 
     % image processing (multiple slides) %
     \subsection{Image Processing}
@@ -404,12 +429,10 @@
     \begin{frame}
         \frametitle{Feature Extraction}
 
-        Features (colour \& shape) are extracted from the segmented images.
-
-        \vspace{10 mm}
+        Features are extracted from the segmented images.
 
         \begin{figure}[!htb]
-            \minipage{0.28\textwidth}
+            \minipage{0.5\textwidth}
               \includegraphics[width=\linewidth]{grabcut_output}
             \endminipage\hfill
         \end{figure}
@@ -437,6 +460,17 @@
         \end{figure}
     \end{frame}
 
+    \begin{frame}
+        \frametitle{Sanz et al.}
+
+        \begin{itemize}
+            \item \textbf{Sanz et al.}, 2013. Species differentiation of
+            slipper orchids using color image analysis.
+            \textit{Lankesteriana} \textbf{12}(3): 165-173
+        \end{itemize}
+    \end{frame}
+    \note{Show comparison with results from Sanz et al.}
+
     \subsection{Neural Network Training}
 
     \begin{frame}
@@ -462,13 +496,13 @@
     \begin{frame}
         \frametitle{Training Data}
 
-        Codewords used for training.
+        Output codes used for training.
 
         \begin{table}[h]\scriptsize
             \begin{center}
             \begin{tabular}{ll}
             \toprule
-            \textbf{Class} & \textbf{Codeword} \\
+            \textbf{Class} & \textbf{Output code} \\
             \midrule
             \textit{Cypripedium}    & \texttt{1 0 0 0 0} \\
             \textit{Mexipedium}     & \texttt{0 1 0 0 0} \\
@@ -509,7 +543,7 @@
         \item Training methods:
             \begin{itemize}
                 \item Standard training
-                \item Training via genetic algorithm
+                \item Genetic training
             \end{itemize}
         \end{itemize}
     \end{frame}
@@ -520,10 +554,10 @@
     \subsection{Results}
 
     \begin{frame}
-        \frametitle{Results}
+        \frametitle{Outcomes}
 
         \begin{itemize}
-            \item A vetted digital image collection
+            \item A reviewed digital image collection
             \item A library of generic image feature extraction algorithms
             \item Trained artificial neural networks
             \item Training and classification methods
@@ -540,13 +574,13 @@
             \begin{center}
             \begin{tabular}{llll}
             \toprule
-            \textbf{Genus} & \textbf{Section Count} & \textbf{Species Count} & \textbf{Photo Count} \\
+            \textbf{Genus} & \textbf{Section count} & \textbf{Species count} & \textbf{Photo count} \\
             \midrule
             \textit{Cypripedium} & 11 & 23 & 141 \\
-            \textit{Mexipedium} & 0 & 1 & 4 \\
+            \textit{Mexipedium} & 1 & 1 & 4 \\
             \textit{Paphiopedilum} & 7 & 71 & 889 \\
             \textit{Phragmipedium} & 4 & 19 & 89 \\
-            \textit{Selenipedium} & 0 & 1 & 4 \\
+            \textit{Selenipedium} & 1 & 1 & 4 \\
             \bottomrule
             \end{tabular}
             \end{center}
@@ -562,13 +596,13 @@
             \begin{center}
             \begin{tabular}{llll}
             \toprule
-            \textbf{Genus} & \textbf{Section Count} & \textbf{Species Count} & \textbf{Photo Count} \\
+            \textbf{Genus} & \textbf{Section count} & \textbf{Species count} & \textbf{Photo count} \\
             \midrule
             \textit{Cypripedium} & 3 & 4 & 25 \\
-            \textit{Mexipedium} & 0 & 1 & 4 \\
+            \textit{Mexipedium} & 1 & 1 & 4 \\
             \textit{Paphiopedilum} & 3 & 4 & 31 \\
             \textit{Phragmipedium} & 1 & 3 & 20 \\
-            \textit{Selenipedium} & 0 & 1 & 4 \\
+            \textit{Selenipedium} & 1 & 1 & 4 \\
             \bottomrule
             \end{tabular}
             \end{center}
@@ -640,6 +674,20 @@
         \end{center}
     \end{frame}
 
+    \begin{frame}[plain]
+        \frametitle{OrchiD -- Classification threshold}
+
+        Photo of Barbara Gravendeel could not be classified.
+
+        \begin{figure}[!htb]
+            \minipage{0.7\textwidth}
+              \includegraphics[width=\linewidth]{OrchiD_Barbara}
+            \endminipage\hfill
+        \end{figure}
+    \end{frame}
+
+    \note{Because the classification result was not significant.}
+
 \section{Conclusions}
 
     \begin{frame}
@@ -648,10 +696,9 @@
         \begin{itemize}
             \item Classification accuracy needs improvement:
             \begin{itemize}
-                \item Training via genetic algorithm
                 \item Manually preprocess images for training
                 \item Combinations of multiple features
-                \item Increase Hamming distances for codewords
+                \item Error-correcting output codes
                 \item Neural network committees
             \end{itemize}
         \end{itemize}
@@ -669,13 +716,14 @@
 
     \begin{frame}{Acknowledgements}
         \begin{itemize}
-            \item Dave Roberts
+            \item 50+ photographers
+            \item David Roberts
             \item Hanneke de Wolf
             \item Naturalis Applied Research grant
             \item Nicolas Davin
             \item Patrick Wijntjes
+            \item SEMO
             \item Wouter Addink
-            \item 50+ photographers
         \end{itemize}
     \end{frame}
 
