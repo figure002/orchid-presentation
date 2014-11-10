@@ -87,43 +87,48 @@
 }
 
 % ToC
-\begin{frame}
-    \frametitle{Outline}
-    \tableofcontents
-\end{frame}
+% \begin{frame}
+%     \frametitle{Outline}
+%     \tableofcontents
+% \end{frame}
 
 
 \section{Introduction}
 
-	% context within which we do this project %
-	\subsection{Background}
-	\begin{frame}
-		\frametitle{Background}
-		\begin{itemize}
-			\item Natural historians, both private and institutional, have large
-			collections of images
-			\item Detailed taxonomic expertise is rare and costly
-			\item Unassisted feature extraction (e.g. phenotyping) has broad applications
-			\item Automated classifiers might sometimes be `good enough'
-		\end{itemize}
-	\end{frame}
+    % context within which we do this project %
+    \subsection{Background}
+    \begin{frame}
+        \frametitle{Background}
+        \begin{itemize}
+            \item Detailed taxonomic expertise is rare and costly
+            \item Natural historians, both private and institutional, have large collections of images
+            \item Unassisted feature extraction (e.g. phenotyping) has broad applications
+            \item Automated classifiers might sometimes be `good enough'
+        \end{itemize}
+    \end{frame}
 
-	% explanation of what "unassisted feature extraction" actually is %
-	\begin{frame}
-		\frametitle{Unassisted feature extraction}
-		\begin{itemize}
-			\item Assisted feature extraction, e.g. by placing landmarks by hand, is
-			labour intensive and cannot scale
-			\item Many expert systems automate feature extraction to identify salient
-			details in an image. For example:
-			\begin{itemize}
-				\item Tissues in medical imaging
-				\item Pollen grains or forams in drilling cores
-				\item Faces of people
-			\end{itemize}
-		\end{itemize}
-	\end{frame}
+    \note{Many more species than taxonomists (taxonomen).}
 
+    \note{Taxonomic identification is important. Identification of new species, endangered species protection, identification of marine invasive species, but also for the amateur naturalist. Problem: not enough taxonomic expertise. Possible solution: automated species classification. To help spread knowledge of biodiversity, Naturalis Biodiversity Center started the digitization of its museum specimens in 2011.}
+
+    \begin{frame}
+        \frametitle{Unassisted feature extraction}
+        \begin{itemize}
+            \item Assisted feature extraction, e.g. by placing landmarks by hand, is
+            labour intensive and cannot scale
+            \item Many expert systems automate feature extraction to identify salient
+            details in an image. For example:
+            \begin{itemize}
+                \item Tissues in medical imaging
+                \item Pollen grains or forams in drilling cores
+                \item Faces of people
+            \end{itemize}
+        \end{itemize}
+    \end{frame}
+
+    \note{Automated classification from digital images requires unassisted
+    feature extraction. Explain of what `unassisted feature extraction`
+    actually is.}
 
     \begin{frame}[plain]
         \frametitle{Landmarking}
@@ -141,25 +146,26 @@
         \textit{Trends Plant Sci.} \textbf{15}(8): 423-6}
     \end{frame}
 
-    \note{Explain what landmarks are (from the previous slide).}
-    \note{Photo from Van der Niet et al. Three-dimensional geometric morphometrics for studying floral shape variation. Trends Plant Sci. 15, 423–6 (2010).}
+    \note{Landmark analysis relies on homologous points, which must often be
+    specified manually.}
 
-	\begin{frame}
-		\frametitle{Automated classifiers}
-		\begin{itemize}
-			\item Automated classification of data using machine learning becomes more and
-			more important. For example:
-			\begin{itemize}
-				\item Spam filters
-				\item Automated stock trading
-				\item Character recognition
-			\end{itemize}
-			\item Artificial Neural Networks (ANNs) are one commonly-used approach
-		\end{itemize}
-	\end{frame}
+    \begin{frame}
+        \frametitle{Automated classifiers}
+        \begin{itemize}
+            \item Automated classification of data using machine learning becomes more and
+            more important. For example:
+            \begin{itemize}
+                \item Spam filters
+                \item Automated stock trading
+                \item Character recognition
+            \end{itemize}
+            \item Artificial Neural Networks (ANNs) are one commonly-used approach
+        \end{itemize}
+    \end{frame}
+
     \note{Explanation of what automated classifiers are.}
 
-	% more information about ANNs %
+    % more information about ANNs %
     \begin{frame}
         \frametitle{Artificial Neural Networks}
 
@@ -220,21 +226,21 @@
         \end{center}
     \end{frame}
 
-	% outline of our goals %
+    % outline of our goals %
     \subsection{Goals}
     \begin{frame}
         \frametitle{Goals}
-		\begin{itemize}
-			\item Simple strategies for managing reference image sets
-			\item Automated segmentation and normalization of digital images
-			\item Unassisted feature extraction algorithms
-			\item ANN `decision trees' that mirror taxonomy
-			\item A user-friendly, proof-of-concept web application
+        \begin{itemize}
+            \item Simple strategies for managing reference image sets
+            \item Automated segmentation and normalization of digital images
+            \item Unassisted feature extraction algorithms
+            \item ANN `decision trees' that mirror taxonomy
+            \item A user-friendly, proof-of-concept web application
         \end{itemize}
     \end{frame}
 
-	% description of the "study system", i.e. slipper orchids %
-	\subsection{Study system}
+    % description of the "study system", i.e. slipper orchids %
+    \subsection{Study system}
     \begin{frame}
         \frametitle{The Slipper Orchids (Cypripedioideae)}
         \begin{itemize}
@@ -263,7 +269,7 @@
 
 \section{Methods}
 
-	% intro slide about how we manage the images %
+    % intro slide about how we manage the images %
     \subsection{Image Management}
     \begin{frame}
         \frametitle{Image Management}
@@ -382,23 +388,23 @@
         \end{center}
     \end{frame}
 
-    \begin{frame}
-        \frametitle{Image Preprocessing}
-        \begin{enumerate}
-            \item Color correction
-                \begin{itemize}
-                    \item \textbf{Naik \& Murthy}, 2003. Hue-preserving color image
-                    enhancement without gamut problem. \textit{IEEE Transactions on
-                    Image Processing} \textbf{12}(12): 1591-1598
-                \end{itemize}
-            \item Foreground segmentation
-                \begin{itemize}
-                    \item \textbf{Rother, Kolmogorov \& Blake}, 2004. GrabCut: Interactive
-                    Foreground Extraction using Iterated Graph Cuts.
-                    \textit{ACM Trans. Graph.} \textbf{23}(3): 309-314
-                \end{itemize}
-        \end{enumerate}
-    \end{frame}
+    % \begin{frame}
+    %     \frametitle{Image Preprocessing}
+    %     \begin{enumerate}
+    %         \item Color correction
+    %             \begin{itemize}
+    %                 \item \textbf{Naik \& Murthy}, 2003. Hue-preserving color image
+    %                 enhancement without gamut problem. \textit{IEEE Transactions on
+    %                 Image Processing} \textbf{12}(12): 1591-1598
+    %             \end{itemize}
+    %         \item Foreground segmentation
+    %             \begin{itemize}
+    %                 \item \textbf{Rother, Kolmogorov \& Blake}, 2004. GrabCut: Interactive
+    %                 Foreground Extraction using Iterated Graph Cuts.
+    %                 \textit{ACM Trans. Graph.} \textbf{23}(3): 309-314
+    %             \end{itemize}
+    %     \end{enumerate}
+    % \end{frame}
 
     \begin{frame}[plain]
         \frametitle{Segmentation via GrabCut}
@@ -440,24 +446,15 @@
 
     \begin{frame}[plain]
         \frametitle{Colour and Shape Extraction}
-        \begin{figure}[h]
-        \centering
-        \includegraphics[width=.60\textwidth]{BGR_means_bins}
-        \end{figure}
-    \end{frame}
 
-    \begin{frame}[plain]
-        \frametitle{Colour and Shape Extraction}
-
-        % Two horizontally aligned images.
-        \begin{figure}[!htb]
-            \minipage{0.50\textwidth}
-              \includegraphics[width=\linewidth]{BGR_means_hor_plot}
-            \endminipage\hfill
-            \minipage{0.50\textwidth}
-              \includegraphics[width=\linewidth]{BGR_means_ver_plot}
-            \endminipage\hfill
-        \end{figure}
+        \begin{center}
+        \begin{tikzpicture}[]
+          \node (img1) {\includegraphics[height=4cm]{BGR_means_bins}};
+          \pause
+          \node (img2) [xshift=-1cm,yshift=-4cm] at (img1.west) {\includegraphics[height=4cm]{BGR_means_hor_plot}};
+          \node (img3) [xshift=1cm,yshift=-4cm] at (img1.east) {\includegraphics[height=4cm]{BGR_means_ver_plot}};
+        \end{tikzpicture}
+        \end{center}
     \end{frame}
 
     \begin{frame}
@@ -473,47 +470,47 @@
 
     \subsection{Neural Network Training}
 
-    \begin{frame}
-        \frametitle{Training Data}
+    % \begin{frame}
+    %     \frametitle{Training Data}
 
-        Format of the training data.
+    %     Format of the training data.
 
-        \begin{table}[h]\scriptsize
-            \begin{center}
-            \begin{tabular}{lllllll}
-            \toprule
-            ID & 1.HOR.B & 1.HOR.G & 1.HOR.R & 1.VER.B & 1.VER.G & 1.VER.R \\
-            \midrule
-            15521194721 & -1 & -1 & -1 & -0.858 & -0.858 & -0.858 \\
-            15501195436 & -1 & -1 & -1 & -0.921 & -0.913 & -0.913 \\
-            14325862838 & -0.984 & -0.984 & -0.984 & -0.952 & -0.952 & -0.960 \\
-            \bottomrule
-            \end{tabular}
-            \end{center}
-        \end{table}
-    \end{frame}
+    %     \begin{table}[h]\scriptsize
+    %         \begin{center}
+    %         \begin{tabular}{lllllll}
+    %         \toprule
+    %         ID & 1.HOR.B & 1.HOR.G & 1.HOR.R & 1.VER.B & 1.VER.G & 1.VER.R \\
+    %         \midrule
+    %         15521194721 & -1 & -1 & -1 & -0.858 & -0.858 & -0.858 \\
+    %         15501195436 & -1 & -1 & -1 & -0.921 & -0.913 & -0.913 \\
+    %         14325862838 & -0.984 & -0.984 & -0.984 & -0.952 & -0.952 & -0.960 \\
+    %         \bottomrule
+    %         \end{tabular}
+    %         \end{center}
+    %     \end{table}
+    % \end{frame}
 
-    \begin{frame}
-        \frametitle{Training Data}
+    % \begin{frame}
+    %     \frametitle{Training Data}
 
-        Output codes used for training.
+    %     Output codes used for training.
 
-        \begin{table}[h]\scriptsize
-            \begin{center}
-            \begin{tabular}{ll}
-            \toprule
-            \textbf{Class} & \textbf{Output code} \\
-            \midrule
-            \textit{Cypripedium}    & \texttt{1 0 0 0 0} \\
-            \textit{Mexipedium}     & \texttt{0 1 0 0 0} \\
-            \textit{Paphiopedilum}  & \texttt{0 0 1 0 0} \\
-            \textit{Phragmipedium}  & \texttt{0 0 0 1 0} \\
-            \textit{Selenipedium}   & \texttt{0 0 0 0 1} \\
-            \bottomrule
-            \end{tabular}
-            \end{center}
-        \end{table}
-    \end{frame}
+    %     \begin{table}[h]\scriptsize
+    %         \begin{center}
+    %         \begin{tabular}{ll}
+    %         \toprule
+    %         \textbf{Class} & \textbf{Output code} \\
+    %         \midrule
+    %         \textit{Cypripedium}    & \texttt{1 0 0 0 0} \\
+    %         \textit{Mexipedium}     & \texttt{0 1 0 0 0} \\
+    %         \textit{Paphiopedilum}  & \texttt{0 0 1 0 0} \\
+    %         \textit{Phragmipedium}  & \texttt{0 0 0 1 0} \\
+    %         \textit{Selenipedium}   & \texttt{0 0 0 0 1} \\
+    %         \bottomrule
+    %         \end{tabular}
+    %         \end{center}
+    %     \end{table}
+    % \end{frame}
 
     \begin{frame}
         \frametitle{Training and Classification}
@@ -543,7 +540,7 @@
         \item Training methods:
             \begin{itemize}
                 \item Standard training
-                \item Genetic training
+                \item Evolutionary algorithm
             \end{itemize}
         \end{itemize}
     \end{frame}
@@ -568,7 +565,7 @@
     \begin{frame}[plain]
         \frametitle{Image Collection}
 
-        In total 1127 photos were collected.
+        In total 1127 photos of 115 species were collected.
 
         \begin{table}[h]\scriptsize
             \begin{center}
@@ -577,20 +574,22 @@
             \textbf{Genus} & \textbf{Section count} & \textbf{Species count} & \textbf{Photo count} \\
             \midrule
             \textit{Cypripedium} & 11 & 23 & 141 \\
-            \textit{Mexipedium} & 1 & 1 & 4 \\
+            \textit{Mexipedium} & 1 & 1 & \color{red}{4} \\
             \textit{Paphiopedilum} & 7 & 71 & 889 \\
             \textit{Phragmipedium} & 4 & 19 & 89 \\
-            \textit{Selenipedium} & 1 & 1 & 4 \\
+            \textit{Selenipedium} & 1 & 1 & \color{red}{4} \\
             \bottomrule
             \end{tabular}
             \end{center}
         \end{table}
     \end{frame}
 
+    \note{Opportunity to ask the crowd for additional photographs.}
+
     \begin{frame}[plain]
         \frametitle{Image Collection}
 
-        A subset of the photo collection with 84 selected photos.
+        A subset of the photo collection with 84 selected photos for 13 species.
 
         \begin{table}[h]\scriptsize
             \begin{center}
@@ -599,10 +598,10 @@
             \textbf{Genus} & \textbf{Section count} & \textbf{Species count} & \textbf{Photo count} \\
             \midrule
             \textit{Cypripedium} & 3 & 4 & 25 \\
-            \textit{Mexipedium} & 1 & 1 & 4 \\
+            \textit{Mexipedium} & 1 & 1 & \color{red}{4} \\
             \textit{Paphiopedilum} & 3 & 4 & 31 \\
             \textit{Phragmipedium} & 1 & 3 & 20 \\
-            \textit{Selenipedium} & 1 & 1 & 4 \\
+            \textit{Selenipedium} & 1 & 1 & \color{red}{4} \\
             \bottomrule
             \end{tabular}
             \end{center}
@@ -620,7 +619,7 @@
             \begin{center}
             \begin{tabular}{lp{3cm}p{3cm}}
             \toprule
-            \textbf{Classification Precision} & \textbf{Accuracy{\newline}k=4} & \textbf{Accuracy (subset){\newline}k=4} \\
+            \textbf{Classification Precision} & \textbf{Accuracy{\newline}n=1127{\newline}k=4} & \textbf{Accuracy{\newline}n=84{\newline}k=4} \\
             \midrule
             genus                   & 75\% ({$\sigma$} 3 pp)    & 85\% ({$\sigma$} 7 pp) \\
             genus/section           & 46\% ({$\sigma$} 7 pp)    & 71\% ({$\sigma$} 14 pp) \\
@@ -677,7 +676,7 @@
     \begin{frame}[plain]
         \frametitle{OrchiD -- Classification threshold}
 
-        Photo of Barbara Gravendeel could not be classified.
+        Photo of Barbara Gravendeel could not be classified as slipper orchid.
 
         \begin{figure}[!htb]
             \minipage{0.7\textwidth}
@@ -716,14 +715,14 @@
 
     \begin{frame}{Acknowledgements}
         \begin{itemize}
-            \item 50+ photographers
-            \item David Roberts
-            \item Hanneke de Wolf
+            \item 50+ orchid photographers (more welcome!)
             \item Naturalis Applied Research grant
-            \item Nicolas Davin
-            \item Patrick Wijntjes
             \item SEMO
             \item Wouter Addink
+            \item Nicolas Davin
+            \item David Roberts
+            \item Patrick Wijntjes
+            \item Hanneke de Wolf
         \end{itemize}
     \end{frame}
 
